@@ -35,7 +35,7 @@ function concatenateStrings(/* value1, value2 */) {
  *   ''      => 0
  */
 function getStringLength(/* value */) {
-  throw new Error('Not implemented');
+  return arguments[0].length;
 }
 
 /**
@@ -52,7 +52,7 @@ function getStringLength(/* value */) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+   return `Hello, ${arguments[0]} ${arguments[1]}!`;
 }
 
 /**
@@ -66,7 +66,7 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+  return arguments[0].slice(6,arguments[0].length-1);
 }
 
 
@@ -81,7 +81,7 @@ function extractNameFromTemplate(/* value */) {
  *   'cat'       => 'c'
  */
 function getFirstChar(/* value */) {
-  throw new Error('Not implemented');
+  return arguments[0].slice(0,1);
 }
 
 /**
@@ -96,7 +96,12 @@ function getFirstChar(/* value */) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+ let str = arguments[0];
+  while(str[0] === '\t'||str[0] === ' '){
+    str = str.slice(1,str.length-1);
+    
+    }
+  return str;  
 }
 
 /**
@@ -111,7 +116,12 @@ function removeLeadingAndTrailingWhitespaces(/* value */) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+  let str = arguments[0];
+  let result = str;
+  for(let i = 1; i<arguments[1];i++){
+    result = result+str;
+    }
+    return result;
 }
 
 /**
@@ -142,7 +152,8 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<a>' => 'a'
  */
 function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+  let str = arguments[0];
+  return str.substring(1,str.length-1);
 }
 
 
@@ -157,7 +168,10 @@ function unbracketTag(/* str */) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+  let str = arguments[0];
+  let result = [];
+  str.split('').forEach(a=>result.push(a.toUpperCase()));
+  return result.join('');
 }
 
 /**
@@ -176,7 +190,8 @@ function convertToUpperCase(/* str */) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+  let str = arguments[0];
+  return str.split(';');
 }
 
 /**
@@ -224,7 +239,21 @@ function getRectangleString(/* width, height */) {
  *
  */
 function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+  let str = arguments[0];
+    let result='';
+    for(let i=0; i<str.length; i++){
+      if(str.charCodeAt(i)>96&&str.charCodeAt(i)<123){
+        result=result+String.fromCharCode((str.charCodeAt(i)-96+13)%26+96);
+      }
+      else if(str.charCodeAt(i)>64&&str.charCodeAt(i)<91){
+        result=result+String.fromCharCode((str.charCodeAt(i)-64+13)%26+64);
+      }
+      else{
+        result=result+str[i];
+      } 
+    }
+    
+  return result;  
 }
 
 /**
