@@ -18,8 +18,8 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-function concatenateStrings(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function concatenateStrings(value1, value2) {
+  return value1 + value2;
 }
 
 
@@ -34,8 +34,8 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
-  return arguments[0].length;
+function getStringLength(value) {
+  return value.length;
 }
 
 /**
@@ -51,8 +51,8 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-   return `Hello, ${arguments[0]} ${arguments[1]}!`;
+function getStringFromTemplate(firstName, lastName) {
+   return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -65,8 +65,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  return arguments[0].slice(6,arguments[0].length-1);
+function extractNameFromTemplate(value) {
+  return value.slice(6,value.length-1);
 }
 
 
@@ -80,8 +80,8 @@ function extractNameFromTemplate(/* value */) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
-  return arguments[0].slice(0,1);
+function getFirstChar(value) {
+  return value.slice(0,1);
 }
 
 /**
@@ -95,9 +95,10 @@ function getFirstChar(/* value */) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
- let str = arguments[0];
-  while(str[0] === '\t'||str[0] === ' '){
+function removeLeadingAndTrailingWhitespaces(value) {
+ 
+    str = value;
+    while(str[0] === '\t'||str[0] === ' '){
     str = str.slice(1,str.length-1);
     
     }
@@ -115,10 +116,10 @@ function removeLeadingAndTrailingWhitespaces(/* value */) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  let str = arguments[0];
+function repeatString(value, count) {
+  let str = value;
   let result = str;
-  for(let i = 1; i<arguments[1];i++){
+  for(let i = 1; i<count;i++){
     result = result+str;
     }
     return result;
@@ -136,7 +137,7 @@ function repeatString(/* value, count */) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
+function removeFirstOccurrences(str, value) {
   throw new Error('Not implemented');
 }
 
@@ -151,8 +152,7 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  let str = arguments[0];
+function unbracketTag(str) {
   return str.substring(1,str.length-1);
 }
 
@@ -167,8 +167,7 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  let str = arguments[0];
+function convertToUpperCase(str) {
   let result = [];
   str.split('').forEach(a=>result.push(a.toUpperCase()));
   return result.join('');
@@ -189,8 +188,7 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  let str = arguments[0];
+function extractEmails(str) {
   return str.split(';');
 }
 
@@ -238,18 +236,17 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  let str = arguments[0];
+function encodeToRot13(str) {
     let result='';
     for(let i=0; i<str.length; i++){
       if(str.charCodeAt(i)>96&&str.charCodeAt(i)<123){
         result=result+String.fromCharCode((str.charCodeAt(i)-96+13)%26+96);
       }
       else if(str.charCodeAt(i)>64&&str.charCodeAt(i)<91){
-        result=result+String.fromCharCode((str.charCodeAt(i)-64+13)%26+64);
+        result = result + String.fromCharCode((str.charCodeAt(i) - 64 + 13) % 26 + 64);
       }
       else{
-        result=result+str[i];
+        result = result + str[i];
       } 
     }
     
