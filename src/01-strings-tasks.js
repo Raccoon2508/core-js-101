@@ -66,7 +66,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-  return value.slice(6, value.length - 1);
+  return value.slice(7, value.length - 1);
 }
 
 
@@ -96,11 +96,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-  let str = value;
-  while (str[0] === '\t' || str[0] === ' ') {
-    str = str.slice(1, str.length - 1);
-  }
-  return str;
+  return value.trim();
 }
 
 /**
@@ -135,8 +131,12 @@ function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const index = str.indexOf(value);
+  if (index !== -1) {
+    return str.slice(0, index).concat(str.slice(index + value.length));
+  }
+  return str;
 }
 
 /**
@@ -238,9 +238,9 @@ function encodeToRot13(str) {
   let result = '';
   for (let i = 0; i < str.length; i += 1) {
     if (str.charCodeAt(i) > 96 && str.charCodeAt(i) < 123) {
-      result += String.fromCharCode(((str.charCodeAt(i) - 96 + 13) % 26) + 96);
+      result += String.fromCharCode(((str.charCodeAt(i) - 97 + 13) % 26) + 97);
     } else if (str.charCodeAt(i) > 64 && str.charCodeAt(i) < 91) {
-      result += String.fromCharCode(((str.charCodeAt(i) - 64 + 13) % 26) + 64);
+      result += String.fromCharCode(((str.charCodeAt(i) - 65 + 13) % 26) + 65);
     } else {
       result += str[i];
     }
