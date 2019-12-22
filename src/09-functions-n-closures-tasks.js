@@ -23,8 +23,8 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  return (x) => f(g(x));
 }
 
 
@@ -44,8 +44,8 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return (x) => x ** exponent;
 }
 
 
@@ -62,10 +62,16 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...args) {
+  let total = 0;
+  return function (x) {
+    args.map((value, index) => {
+      total += value * x ** (args.length - (index - 1));
+      return null;
+    });
+    return total;
+  };
 }
-
 
 /**
  * Memoizes passed function and returns function
@@ -81,10 +87,10 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const a = func();
+  return () => a;
 }
-
 
 /**
  * Returns the function trying to call the passed function and if it throws,
@@ -101,10 +107,16 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  return function () {
+    for (let i = 0; i < attempts;) {
+      try {
+        return func();
+      } catch (err) { i += 1; }
+    }
+    return null;
+  };
 }
-
 
 /**
  * Returns the logging wrapper for the specified method,
@@ -129,10 +141,15 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  return function (...args) {
+    const argumetnsString = JSON.stringify(args).slice(1, -1);
+    logFunc(`${func.name}(${argumetnsString}) starts`);
+    const total = func(...args);
+    logFunc(`${func.name}(${argumetnsString}) ends`);
+    return total;
+  };
 }
-
 
 /**
  * Return the function with partial applied arguments
